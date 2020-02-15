@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/jsTree/themes/default/style.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/jsTree3/jstree.min.js"></script>
+    <script src="~/Scripts/jsTreeGetSample.js"></script>
+</head>
+<body>
+    <div style="display:table;width:100%">
+        
+        <div style="display:table-cell;width:50%">
+            Древо
+            <div id="TreeViewSample"></div>
+            Индексы
+            <br\>
+            @Html.TextArea("CID_Sample",new { @style= "width:600px;height:60px" })
+        </div>
+        <div style="display:table-cell;width:50%">
+            Древо
+            <div id="TreeViewNew"></div>
+            Индексы
+            <br\>
+            @Html.TextArea("CID_New", new { @style = "width:600px;height:60px" })
+        </div>
+    </div>
+</body>
+</html>
