@@ -24,6 +24,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
@@ -105,6 +109,7 @@
     <Content Include="Content\jsTree\themes\default\throbber.gif" />
     <Content Include="Global.asax" />
     <Content Include="Content\SampleData.xlsx" />
+    <Content Include="Content\InitialData.xlsx" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jsTreeGetSample.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -121,7 +126,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\GetExcelData.cs" />
+    <Compile Include="Models\ItemWithCid.cs" />
     <Compile Include="Models\jsTree3Node.cs" />
+    <Compile Include="Models\ProcessInputData.cs" />
     <Compile Include="Models\TreeViewElements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

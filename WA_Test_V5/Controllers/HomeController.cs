@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using WA_Test_V5.GetData.Excel;
 using WA_Test_V5.Interface.JsTreeNodes;
+using WA_Test_V5.Models;
 
 namespace WA_Test_V5.Controllers
 {
@@ -15,6 +16,7 @@ namespace WA_Test_V5.Controllers
         }
         public JsonResult GetTreeViewSample()
         {
+            new ProcessInputData(Server.MapPath("~/Content/InitialData.xlsx")).GetData();
             var parser = new GetExcelData(Server.MapPath("~/Content/SampleData.xlsx"));
             var _SampleTreeView = parser.GetSample();
             int nodeUnicID = 0;
