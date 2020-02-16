@@ -68,3 +68,46 @@ $(function () {
             }
     });
 });
+$(function () {
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        cache: false,
+        url: '/Home/GetTreeViewNew',
+        data: { 'target': $('#targetTreeView').val() },
+        success:
+            function (json) {
+                $('#TreeViewNew')
+                    .jstree
+                    ({
+                        'core':
+                        {
+                            'data': json
+                        },
+                        "plugins": ["search", "checkbox", "types"],
+                        "types":
+                        {
+                            "default": { "icon": "glyphicon glyphicon-flash" },
+                            "demo": { 'valid_children': ['none'], "icon": "glyphicon glyphicon-question-sign" }
+                        }
+                    })
+                    .on('changed.jstree',
+                        function (e, data) {
+                            var i, j, r = [];
+                            for (i = 0, j = data.selected.length; i < j; i++) {
+                                var TargetNode = data.instance.get_node(data.selected[i]);
+                                var firsChildren = data.instance.get_node(TargetNode.children[0]);
+                                if (TargetNode.children.length === 0) {
+                                    var wId = data.instance.get_node(data.selected[i]).data;
+                                    if (jQuery.inArray(wId, r) === -1) {
+                                        r.push(wId);
+                                    }
+                                }
+                            }
+                            var idList = r.join(';');
+                            $('#CID_New').val(idList);
+                        }
+                    );
+            }
+    });
+});

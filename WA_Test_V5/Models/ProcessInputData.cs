@@ -27,7 +27,7 @@ namespace WA_Test_V5.Models
 			ExcelRange Cells = dataSheet.Cells;
 
 			var rootNode = new Dictionary<string, object>();
-			for (var row = 2; row < numberOfRows; row++)
+			for (var row = 2; row <= numberOfRows; row++)
 			{
 				var node = rootNode;
 				for (var col = 1; col < numberOfCols - 2; col++)
@@ -80,22 +80,6 @@ namespace WA_Test_V5.Models
 				var keys = pair.Value.Keys.OrderBy(key => key);
 				foreach (var key in keys)
 				{
-					var nextNode = pair.Value[key];
-					if (nextNode is HashSet<ItemWithCid>)
-					{
-						var set = (HashSet<ItemWithCid>)nextNode;
-						var treeElements = set.Select(item => new TreeViewElements
-						{
-							Parent_ID = pair.Key.ToString(),
-							Name = item.Name,
-							CID = item.Cid
-						});
-						leaves.AddRange(treeElements);
-
-						continue;
-					}
-
-					var dictionary = (Dictionary<string, object>)nextNode;
 					var currentTreeElementId = (idCounter++).ToString();
 					var currentTreeElement = new TreeViewElements
 					{
@@ -105,6 +89,23 @@ namespace WA_Test_V5.Models
 						Parent_ID = pair.Key,
 					};
 					nodes.Add(currentTreeElement);
+
+					var nextNode = pair.Value[key];
+					if (nextNode is HashSet<ItemWithCid>)
+					{
+						var set = (HashSet<ItemWithCid>)nextNode;
+						var treeElements = set.Select(item => new TreeViewElements
+						{
+							Parent_ID = currentTreeElementId,
+							Name = item.Name,
+							CID = item.Cid
+						});
+						leaves.AddRange(treeElements);
+
+						continue;
+					}
+
+					var dictionary = (Dictionary<string, object>)nextNode;
 					queue.Enqueue(new KeyValuePair<string, Dictionary<string, object>>(
 						currentTreeElementId,
 						dictionary));
