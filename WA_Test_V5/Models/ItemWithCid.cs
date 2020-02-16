@@ -7,10 +7,10 @@ namespace WA_Test_V5.Models
 {
 	public class ItemWithCid : IEquatable<ItemWithCid>
 	{
-		public string Cid;
+		public int Cid;
 		public string Name;
 
-		public ItemWithCid(string cid, string name)
+		public ItemWithCid(int cid, string name)
 		{
 			Cid = cid;
 			Name = name;
